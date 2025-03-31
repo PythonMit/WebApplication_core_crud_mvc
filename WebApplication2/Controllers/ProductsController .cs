@@ -15,6 +15,7 @@ namespace WebApplication2.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            // check data
             return View(await _dbContextDetails.Products.ToListAsync());
         }
 
