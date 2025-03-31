@@ -90,26 +90,26 @@ namespace WebApplication2.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-            //var product = await _dbContextDetails.Products.FindAsync(id);
-            //_dbContextDetails.Products.Remove(product);
-            //await _dbContextDetails.SaveChangesAsync();
-            //return RedirectToAction(nameof(Index));
-            var product = await _dbContextDetails.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (id == null)
             {
                 return NotFound();
             }
+            var product = await _dbContextDetails.Products.FindAsync(id);
+            _dbContextDetails.Products.Remove(product);
+            await _dbContextDetails.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //var product = await _dbContextDetails.Products
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (product == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(product);
+            //return View(product);
         }
 
         // POST: Products/Delete/5
-        [HttpPost]
+        [HttpDelete, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
